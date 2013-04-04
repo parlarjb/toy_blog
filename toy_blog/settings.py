@@ -22,7 +22,7 @@ DATABASES = {
     }
 }
 
-DATABASES['PASSWORD'] = PASSWORD
+DATABASES['default']['PASSWORD'] = PASSWORD
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
      'django.contrib.admindocs',
      'south',
+     'blog',
 )
 
 # A sample logging configuration. The only tangible logging
