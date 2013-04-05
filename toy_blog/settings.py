@@ -1,6 +1,9 @@
 # Django settings for toy_blog project.
+from unipath import Path
 
 from local_settings import *
+
+PROJECT_DIR = Path(__file__).ancestor(1)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -112,6 +115,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    PROJECT_DIR.child("blog").child("templates"),
+    PROJECT_DIR.child("templates"),
 )
 
 INSTALLED_APPS = (
@@ -124,7 +129,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
      'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-     'django.contrib.admindocs',
+     #'django.contrib.admindocs',
      'south',
      'blog',
 )

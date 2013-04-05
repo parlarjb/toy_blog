@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <script>
+  $(function() {
+      $( "#datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
+  });
+
+  
+  </script>
+
+<form action="/cms/new/" method="post">
+    {% csrf_token %}
+    Title: <input type="text" name="title"><br/>
+    Slug: <input type="text" name="slug"><br/>
+    Date: <input type="text" id="datepicker" name="date"><br/>
+    Body: <textarea name="body" rows="10" cols="48"></textarea>
+
+    <input type="submit"/>
+
+</form>
+{% endblock %}
