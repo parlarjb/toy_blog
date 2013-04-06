@@ -3,19 +3,21 @@
 {% block content %}
  <script>
   $(function() {
-      $( "#datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
+      $( "#id_date" ).datepicker({dateFormat: "yy-mm-dd"});
   });
 
   
   </script>
-
-<form action="/cms/new/" method="post">
+  {{title}}
+  <form action="{{action}}" method="post">
     {% csrf_token %}
-    Title: <input type="text" name="title"><br/>
-    Slug: <input type="text" name="slug"><br/>
-    Date: <input type="text" id="datepicker" name="date"><br/>
-    Body: <textarea name="body" rows="10" cols="48"></textarea>
-
+    {{ form.non_field_errors}}
+    {% for field in form %}
+        <div>
+            {{field.errors}}
+            {{field.label_tag}} : {{field}}
+        </div>
+    {% endfor %}
     <input type="submit"/>
 
 </form>

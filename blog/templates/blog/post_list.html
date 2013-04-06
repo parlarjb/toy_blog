@@ -1,6 +1,6 @@
-{% if latest_blog_list %}
+{% if post_list %}
 <ul>
-    {% for post in latest_blog_list %}
+    {% for post in post_list %}
         <li><a href="/{{post.slug}}/">{{post.title}}</a></li>
     {% endfor %}
     </ul>
