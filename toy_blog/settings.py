@@ -88,6 +88,8 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+LOGIN_REDIRECT_URL='/'
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -116,6 +118,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     PROJECT_DIR.child("blog").child("templates"),
+    PROJECT_DIR.child("accounts").child("templates"),
     PROJECT_DIR.child("templates"),
 )
 
@@ -132,6 +135,7 @@ INSTALLED_APPS = (
      #'django.contrib.admindocs',
      'south',
      'blog',
+     'accounts',
 )
 
 # A sample logging configuration. The only tangible logging

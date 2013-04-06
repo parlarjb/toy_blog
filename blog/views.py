@@ -1,10 +1,15 @@
 # Create your views here.
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.template import loader, RequestContext
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.urlresolvers import reverse
 from blog.models import Post
 from blog.forms import PostForm
 
 from django.http import HttpResponse, HttpResponseRedirect
+
+def is_staff(user):
+    return user.is_staff
 
 def index(request):
     latest_blog_list = Post.objects.all().order_by('-date')[:5]
@@ -13,6 +18,16 @@ def index(request):
 def cms(request):
     return HttpResponse("Manage")
 
+
+def is_staff(function):
+    def new_func(request):
+        if not request.user.is_staff:
+            return HttpResponse("Not a staff member!")
+        return function(request)
+    return new_func
+
+@login_required
+@is_staff
 def new_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -29,11 +44,8 @@ def new_post(request):
         form = PostForm()
     return render(request, 'blog/new_post.html', {'form':form, 'action':'/cms/new/'}) 
 
-def make_post_data(post):
-    return post_data
-
+@login_required
 def edit_post(request, slug):
-    print request.user
     post = get_object_or_404(Post, slug=slug)
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -53,6 +65,8 @@ def edit_post(request, slug):
         form = PostForm(initial = post_data)
     return render(request, 'blog/new_post.html', {'form':form, 'title':'Edit Post', 'action':'/cms/edit/%s/'%slug})
 
+@login_required
+@is_staff
 def delete_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if request.method == 'POST':

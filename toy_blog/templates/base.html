@@ -3,5 +3,12 @@
 <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
+<body>
 {% block content %}
 {% endblock %}
+
+{% block footer %}
+<a href="{% url logout %}">Logout</a>
+{% endblock %}
+
+</body>
