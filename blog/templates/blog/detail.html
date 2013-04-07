@@ -9,15 +9,30 @@
 
 <form action="/comments/post/{{slug}}/" method="post">
     {% csrf_token %}
-    
+    <h2>Add Comment</h2> 
     {{ comment_form.non_field_errors}}
     {% for field in comment_form %}
-        <div>
-            {{field.errors}}
-            {{field.label_tag}} : {{field}}
-        </div>
+        {% if field.is_hidden %}
+            <div>{{field}}</div>
+        {% else %}
+            <div>
+                {{field.errors}}
+                {{field.label_tag}} : {{field}}
+            </div>
+        {% endif %}
     {% endfor %}
     <input type="submit"/>
 </form>
 
+{% if comments %}
+    {% for comment in comments %}
+    <div class="comment" >
+        <ul>
+            <li>{{comment.author}}</li>
+            <li>{{comment.date_time}}</li>
+            <li>{{comment.body}}</li>
+        </ul>
+    </div>
+    {% endfor %}
+{% endif %}
 {% endblock %}

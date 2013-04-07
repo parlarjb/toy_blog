@@ -82,6 +82,8 @@ def delete_post(request, slug):
     return render(request, 'blog/delete_post.html', {'post':post, 'path':request.get_full_path})
 
 def detail(request, slug):
-    p = get_object_or_404(Post, slug=slug)
+    post = get_object_or_404(Post, slug=slug)
     comment_form = CommentForm()
-    return render(request, 'blog/detail.html', {'post':p, 'comment_form':comment_form, 'slug':slug})
+    comments = post.comment_set.all().order_by('date_time')
+    context = {'post':post, 'comment_form':comment_form, 'slug':slug, 'comments':comments}
+    return render(request, 'blog/detail.html', context)

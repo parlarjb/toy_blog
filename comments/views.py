@@ -14,8 +14,14 @@ def create_comment(request, slug):
         if form.is_valid():
             author = form.cleaned_data['author']
             body = form.cleaned_data['body']
-            comment = Comment.objects.create(author=author, body=body, post=post, parent_comment=None)
+            parent_comment = form.cleaned_data['parent']
+            if not parent_comment:
+                parent_comment = None
+            comment = Comment.objects.create(author=author, body=body, post=post, parent_comment=parent_comment)
             return HttpResponseRedirect('/%s/' % slug)
         else:
             print "Bad comment data"
-    return render(request)
+    comment_form = CommentForm()
+    return render(request, 'blog/detail.html', {'post':post, 'comment_form':comment_form, 'slug':slug})
+
+
