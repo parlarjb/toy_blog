@@ -21,10 +21,10 @@ def cms(request):
 
 
 def is_staff(function):
-    def new_func(request):
+    def new_func(request, *args, **kwargs):
         if not request.user.is_staff:
             return HttpResponse("Not a staff member!")
-        return function(request)
+        return function(request, *args, **kwargs)
     return new_func
 
 @login_required

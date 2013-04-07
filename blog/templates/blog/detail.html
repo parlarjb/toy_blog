@@ -6,7 +6,16 @@
     <li>{{post.date}}</li>
     <li>{{post.body}}</li>
 </ul>
-
+<div>
+    {% if user.is_authenticated %}
+    <ul>
+        <li><a href="/cms/edit/{{slug}}/">Edit this post</a></li>
+        {% if user.is_staff %}
+        <li><a href="/cms/delete/{{slug}}/">Delete this post</a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</div>
 <form action="/comments/post/{{slug}}/" method="post">
     {% csrf_token %}
     <h2>Add Comment</h2> 
@@ -23,6 +32,8 @@
     {% endfor %}
     <input type="submit"/>
 </form>
+
+
 
 {% if comments %}
     {% for comment in comments %}
