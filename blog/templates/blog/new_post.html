@@ -9,7 +9,7 @@
   
   </script>
   {{title}}
-  <form action="{{action}}" method="post">
+<form action="{{action}}" method="post">
     {% csrf_token %}
     {{ form.non_field_errors}}
     {% for field in form %}

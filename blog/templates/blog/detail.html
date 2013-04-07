@@ -6,4 +6,18 @@
     <li>{{post.date}}</li>
     <li>{{post.body}}</li>
 </ul>
+
+<form action="/comments/post/{{slug}}/" method="post">
+    {% csrf_token %}
+    
+    {{ comment_form.non_field_errors}}
+    {% for field in comment_form %}
+        <div>
+            {{field.errors}}
+            {{field.label_tag}} : {{field}}
+        </div>
+    {% endfor %}
+    <input type="submit"/>
+</form>
+
 {% endblock %}

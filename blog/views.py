@@ -1,10 +1,11 @@
 # Create your views here.
 from django.shortcuts import render, render_to_response, get_object_or_404
-from django.template import loader, RequestContext
+from django.template import loader
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
 from blog.models import Post
 from blog.forms import PostForm
+from comments.forms import CommentForm
 
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -42,7 +43,7 @@ def new_post(request):
             print "Bad form data"
     else:
         form = PostForm()
-    return render(request, 'blog/new_post.html', {'form':form, 'action':'/cms/new/'}) 
+    return render(request, 'blog/new_post.html', {'form':form, 'action':'/cms/new/'})
 
 @login_required
 def edit_post(request, slug):
@@ -82,4 +83,5 @@ def delete_post(request, slug):
 
 def detail(request, slug):
     p = get_object_or_404(Post, slug=slug)
-    return render_to_response('blog/detail.html', {'post':p})
+    comment_form = CommentForm()
+    return render(request, 'blog/detail.html', {'post':p, 'comment_form':comment_form, 'slug':slug})

@@ -90,6 +90,7 @@ STATICFILES_FINDERS = (
 
 LOGIN_REDIRECT_URL='/'
 
+MAX_COMMENT_NAME_LENGTH = 128
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -136,6 +137,7 @@ INSTALLED_APPS = (
      'south',
      'blog',
      'accounts',
+     'comments',
 )
 
 # A sample logging configuration. The only tangible logging

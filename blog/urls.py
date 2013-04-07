@@ -3,12 +3,6 @@ from blog.models import Post
 from django.views.generic import TemplateView, ListView
 
 urlpatterns = patterns('blog.views',
-    # Examples:
-    # url(r'^$', 'toy_blog.views.home', name='home'),
-    # url(r'^toy_blog/', include('toy_blog.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^$', ListView.as_view(model=Post,
                                 context_object_name="post_list")),
     url(r'^cms/$', 'cms'),
