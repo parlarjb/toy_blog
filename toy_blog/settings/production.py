@@ -14,6 +14,14 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'db_cache_table',
+    }
+}
+
+
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 ALLOWED_HOSTS = ['parlarjb.xen.prgmr.com']
