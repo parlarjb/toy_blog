@@ -86,7 +86,7 @@ Since we used `South` for migrations, this is a two-step process.
     python manage.py syncdb
     python manage.py migrate
 
-### Create database cache ###
+### Create cache ###
 
 I'm using Django's standard database cache. You'll need to run the following command to create the
 tables in the database:
