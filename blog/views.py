@@ -31,6 +31,8 @@ def is_staff(function):
 @is_staff
 def new_post(request):
     if request.method == 'POST':
+        if '_cancel' in request.POST:
+            return HttpResponseRedirect('/')
         form = PostForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data['title']
