@@ -22,6 +22,12 @@ I took a few hints from the excellent [Two Scoops of Django](https://django.2sco
 important being the separation of `settings.py` into `base.py`, `local.py` and `production.py`. The intent of this is to avoid the old `local_settings.py` pattern that so many people use, and allow us to keep *all*
 configuration files in source control.
 
+It also makes other things easier. You don't need to worry about correctly setting the `DEBUG` flag, because
+it's assigned appropriately for local vs. production. The django-debug-toolbar can easily be put into
+the `INSTALLED_APPS` in local, but kept out of production, and you don't need to manually track which
+apps need to go where. And you don't need to worry about different developers having different versions
+of the typically untracked `local_settings.py`. It just works!
+
 This does bring up the old question of "Where do you keep your passwords and secret keys?" The suggestion
 from Two Scoops is that you create environment variables for those on your development and production 
 machines. This requires that you have some process in place for storing and tracking these values, but
