@@ -23,8 +23,8 @@ CACHES = {
 
 # UpdateCacheMiddleware *must* be the first middleware, and FetchFromCacheMiddleware
 # *must* be the last
-MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',)
-                     + MIDDLEWARE_CLASSES
+MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',) \
+                     + MIDDLEWARE_CLASSES \
                      + ('django.middleware.cache.FetchFromCacheMiddleware',)
 
 CACHE_MIDDLEWARE_ALIAS = 'memcached_middleware_alias'
