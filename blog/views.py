@@ -3,7 +3,7 @@ from django.shortcuts import render, render_to_response, get_object_or_404
 from django.template import loader
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
-from django.views.decorators.cache.cache_page()
+from django.views.decorators.cache.cache_page
 from blog.models import Post
 from blog.forms import PostForm
 from comments.forms import CommentForm
