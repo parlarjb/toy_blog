@@ -53,7 +53,7 @@ Finally, activate your virtualenv
 
 ### Checkout the code ###
 
-    it clone git://github.com/parlarjb/toy_blog.git
+    git clone git://github.com/parlarjb/toy_blog.git
 
 ### Install requirements ###
 
@@ -75,7 +75,7 @@ on your system, and that you have the password for that user (so you can `su`)
 
 ### Insert our tables into the database ###
 
-Since we used South for migrations, this is a two-step process.
+Since we used `South` for migrations, this is a two-step process.
 
     python manage.py syncdb
     python manage.py migrate
