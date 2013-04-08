@@ -6,4 +6,3 @@ psycopg2==2.4.6
 wsgiref==0.1.2
 gunicorn==0.17.2
 django-debug-toolbar==0.9.4
-wsgiref==0.1.2
