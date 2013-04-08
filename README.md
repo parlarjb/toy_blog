@@ -2,6 +2,20 @@
 
 This is an incredibly simple blogging platform, written to re-introduce myself to Django.
 
+It currently supports logging in and out, creating posts, and adding comments to posts. There's a "Login"
+link at the top of each page, and a "Logout" at the bottom. To create new users, you'll have to use the
+Django admin at `/admin/`. I make use of the `Staff` flag in the Django admin. Users that are marked as
+`Staff` are allowed to add/edit/delete posts. Users that are logged-in but do *not* have the `Staff` flag
+are *only* allowed to edit existing posts.
+
+Anyone can add a comment to any blog, whether or not they're logged in.
+
+You can change a user's password at `/accounts/password_change/`, but I don't yet have that linked 
+anywhere on the site.
+
+Please don't use this blog for anything real. It's ugly, missing tons of basic functionality, and there
+are better systems out there. This was purely a learning exercise for me.
+
 # Installation #
 
 I took a few hints from the excellent [Two Scoops of Django](https://django.2scoops.org) book. The most 
