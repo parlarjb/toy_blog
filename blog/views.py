@@ -3,15 +3,21 @@ from django.shortcuts import render, render_to_response, get_object_or_404
 from django.template import loader
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
+from django.views.decorators.cache.cache_page()
 from blog.models import Post
 from blog.forms import PostForm
 from comments.forms import CommentForm
 
 from django.http import HttpResponse, HttpResponseRedirect
 
-def is_staff(user):
-    return user.is_staff
+def is_staff(function):
+    def new_func(request, *args, **kwargs):
+        if not request.user.is_staff:
+            return HttpResponse("Not a staff member!")
+        return function(request, *args, **kwargs)
+    return new_func
 
+@cache_page(10)
 def index(request):
     latest_blog_list = Post.objects.all().order_by('-date')[:5]
     return render_to_response('blog/index.html', {'latest_blog_list':latest_blog_list})
@@ -20,12 +26,6 @@ def cms(request):
     return HttpResponse("Manage")
 
 
-def is_staff(function):
-    def new_func(request, *args, **kwargs):
-        if not request.user.is_staff:
-            return HttpResponse("Not a staff member!")
-        return function(request, *args, **kwargs)
-    return new_func
 
 @login_required
 @is_staff
@@ -47,6 +47,7 @@ def new_post(request):
         form = PostForm()
     return render(request, 'blog/new_post.html', {'form':form, 'action':'/cms/new/'})
 
+@cache_page(10)
 @login_required
 def edit_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
