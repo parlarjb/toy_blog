@@ -9,8 +9,12 @@ from comments.forms import CommentForm
 
 from django.http import HttpResponse, HttpResponseRedirect
 
-def is_staff(user):
-    return user.is_staff
+def is_staff(function):
+    def new_func(request, *args, **kwargs):
+        if not request.user.is_staff:
+            return HttpResponse("Not a staff member!")
+        return function(request, *args, **kwargs)
+    return new_func
 
 def index(request):
     latest_blog_list = Post.objects.all().order_by('-date')[:5]
@@ -19,13 +23,6 @@ def index(request):
 def cms(request):
     return HttpResponse("Manage")
 
-
-def is_staff(function):
-    def new_func(request, *args, **kwargs):
-        if not request.user.is_staff:
-            return HttpResponse("Not a staff member!")
-        return function(request, *args, **kwargs)
-    return new_func
 
 @login_required
 @is_staff
