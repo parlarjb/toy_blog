@@ -20,7 +20,7 @@ DATABASES = {
         'NAME': 'django_db',                      # Or path to database file if using sqlite3.
         'USER': 'django_login',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': 'LOCALHOST',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -29,7 +29,10 @@ DATABASES['default']['PASSWORD'] = PASSWORD
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+if not debug:
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = ['parlarjb.xen.prgmr.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -67,7 +70,10 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = PROJECT_DIR
+print STATIC_ROOT
+import sys
+print "PATH", sys.path
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -140,6 +146,7 @@ INSTALLED_APPS = (
      'blog',
      'accounts',
      'comments',
+     'gunicorn',
 )
 
 # A sample logging configuration. The only tangible logging
