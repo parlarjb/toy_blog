@@ -27,7 +27,7 @@ MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',) \
                      + MIDDLEWARE_CLASSES \
                      + ('django.middleware.cache.FetchFromCacheMiddleware',)
 
-CACHE_MIDDLEWARE_ALIAS = 'memcached_middleware_alias'
+CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 10
 CACHE_MIDDLEWARE_KEY_PREFIX = 'toy_blog'
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
