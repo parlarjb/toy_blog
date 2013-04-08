@@ -88,13 +88,9 @@ Since we used `South` for migrations, this is a two-step process.
 
 ### Create cache ###
 
-I'm using Django's standard database cache. You'll need to run the following command to create the
-tables in the database:
+I'm doing a site-wide memcached setup right now. No work needs to be done, other than having memcached 
+installed and running, and the usual 11211 port.
     
-    python manage.py createcachetable db_cache_table
-
-If you don't want it to be called `db_cache_table`, then use something else, but make sure to also change
-it in `local.py/production.py`
 
 ### Collect static files ###
 
