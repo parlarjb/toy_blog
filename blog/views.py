@@ -3,6 +3,7 @@ from django.shortcuts import render, render_to_response, get_object_or_404
 from django.template import loader
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from blog.models import Post
 from blog.forms import PostForm
 from comments.forms import CommentForm
@@ -16,9 +17,6 @@ def is_staff(function):
         return function(request, *args, **kwargs)
     return new_func
 
-def index(request):
-    latest_blog_list = Post.objects.all().order_by('-date')[:5]
-    return render_to_response('blog/index.html', {'latest_blog_list':latest_blog_list})
 
 def cms(request):
     return HttpResponse("Manage")

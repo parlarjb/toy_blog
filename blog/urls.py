@@ -4,7 +4,8 @@ from django.views.generic import TemplateView, ListView
 
 urlpatterns = patterns('blog.views',
     url(r'^$', ListView.as_view(model=Post,
-                                context_object_name="post_list")),
+                                context_object_name="post_list",
+                                paginate_by=5)),
     url(r'^cms/$', 'cms'),
     url(r'^cms/new/$', 'new_post'),
     url(r'^cms/edit/(?P<slug>[-\w]+)/$', 'edit_post'),
