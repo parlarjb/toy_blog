@@ -1,3 +1,5 @@
+# Fairly standard .gitignore file for Python projects
+
 *.py[cod]
 
 # C extensions
